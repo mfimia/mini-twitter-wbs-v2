@@ -11,21 +11,26 @@ export const meQuery = async (req, res) => {
     const userId = user[0]._id.toString();
     await res.json({ userId });
   } catch (error) {
-    console.error("add user error");
     res.status(500).send("Error getting user");
   }
 };
 
 export const addUser = async (req, res) => {
   try {
-    const { username, handle, avatar } = req.body;
-    // TODO: avoid adding username/handle empty
-    // check if user already exists
-    const user = await User.create({ username, handle, avatar });
+    const { username, handle, avatar } = await req.body;
 
-    await res.json(user);
+    if (!username || !handle) return res.status(400).send("Bad request");
+
+    const duplicatedHandle = await User.find({ handle });
+    if (duplicatedHandle[0]) return res.status(401).send("Handle taken");
+
+    const duplicatedName = await User.find({ username });
+    if (duplicatedName[0]) return res.status(401).send("Username taken");
+
+    const newUser = await User.create({ username, handle, avatar });
+
+    await res.json(newUser);
   } catch (error) {
-    console.error("add user error");
     res.status(500).send("Error adding user");
   }
 };
@@ -36,7 +41,6 @@ export const getUsers = async (_, res) => {
 
     await res.json(users);
   } catch (error) {
-    console.error("get user error");
     res.status(500).send("Error getting user");
   }
 };
@@ -65,7 +69,6 @@ export const findUser = async (req, res) => {
 
     return res.json(user);
   } catch (error) {
-    console.error("get user error");
     res.status(500).send("Error getting user");
   }
 };
@@ -78,7 +81,6 @@ export const getRandomUser = async (_, res) => {
 
     return res.json(user[randomNumber]);
   } catch (error) {
-    console.error("get user error");
     res.status(500).send("Error getting user");
   }
 };

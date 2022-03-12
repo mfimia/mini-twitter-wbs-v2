@@ -6,7 +6,7 @@ const UserSchema = mongoose.Schema({
     required: true,
     unique: true,
     minLength: 3,
-    maxLength: 12,
+    maxLength: 20,
     match: [/[A-Za-z0-9]/],
   },
   handle: {
@@ -14,8 +14,8 @@ const UserSchema = mongoose.Schema({
     required: true,
     unique: true,
     minLength: 3,
-    maxLength: 12,
-    match: [/[A-Za-z0-9]/],
+    maxLength: 20,
+    match: [/@[A-Za-z0-9]/],
   },
   avatar: {
     type: String,
