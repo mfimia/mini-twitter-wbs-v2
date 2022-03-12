@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/users", require("./routes/user"));
-// app.use("/messages", require("./routes/message"));
+app.use("/messages", require("./routes/message"));
 
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);
