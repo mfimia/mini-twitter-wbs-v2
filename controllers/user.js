@@ -19,6 +19,8 @@ export const meQuery = async (req, res) => {
 export const addUser = async (req, res) => {
   try {
     const { username, handle, avatar } = req.body;
+    // TODO: avoid adding username/handle empty
+    // check if user already exists
     const user = await User.create({ username, handle, avatar });
 
     await res.json(user);
