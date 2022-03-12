@@ -22,6 +22,12 @@ const MessageSchema = mongoose.Schema(
   }
 );
 
+// arrow function does not work with "this" keyword
+MessageSchema.pre("find", function () {
+  // this is an instance of mongoose.Query
+  this.populate("author");
+});
+
 const Message = mongoose.model("Message", MessageSchema);
 
 export default Message;
