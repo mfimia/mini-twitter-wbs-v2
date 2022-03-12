@@ -5,11 +5,14 @@
 - [GET all users](https://mini-twitter-v2.herokuapp.com/users)
 - [POST one user](https://mini-twitter-v2.herokuapp.com/users)
 - [GET current user](https://mini-twitter-v2.herokuapp.com/users/me)
+- [GET random user](https://mini-twitter-v2.herokuapp.com/users/random)
 - [GET user by id](https://mini-twitter-v2.herokuapp.com/users/:id)
 - [GET messages by user id](https://mini-twitter-v2.herokuapp.com/users/:id/messages)
 - [GET all messages ](https://mini-twitter-v2.herokuapp.com/messages)
 - [POST one message](https://mini-twitter-v2.herokuapp.com/messages)
+- [SEARCH one message](https://mini-twitter-v2.herokuapp.com/messages/search/:keyword)
 - [GET message by id](https://mini-twitter-v2.herokuapp.com/messages/:id)
+- [DELETE message by id](https://mini-twitter-v2.herokuapp.com/messages/:id)
 
 ### GET all users
 
@@ -36,6 +39,14 @@ Required: `username`, `handle`, `avatar`(default provided if empty)
 
 Provide user handle and returns your user id.
 Required: `handle`
+
+### GET random user
+
+| URL                                          | Method |
+| -------------------------------------------- | ------ |
+| https://mini-twitter-v2.herokuapp.com/random | `GET`  |
+
+Returns a random user from database
 
 ### GET user by id
 
@@ -72,6 +83,15 @@ Returns all messages pesent in database
 Creates one message in database
 Required: `text`, `author`
 
+### SEARCH one message
+
+| URL                                                            | Method |
+| -------------------------------------------------------------- | ------ |
+| https://mini-twitter-v2.herokuapp.com/messages/search/:keyword | `GET`  |
+
+Finds one message in database by keword
+Required: `keyword`
+
 ### GET message by id
 
 | URL                                                | Method |
@@ -79,4 +99,13 @@ Required: `text`, `author`
 | https://mini-twitter-v2.herokuapp.com/messages/:id | `GET`  |
 
 Provide an id and get the message
+Required: `_id`
+
+### DELETE message by id
+
+| URL                                                | Method   |
+| -------------------------------------------------- | -------- |
+| https://mini-twitter-v2.herokuapp.com/messages/:id | `DELETE` |
+
+Provide an id and delete the message
 Required: `_id`

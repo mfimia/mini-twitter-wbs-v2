@@ -36,3 +36,31 @@ export const getMessageById = async (req, res) => {
     res.status(500).send("Error getting messages");
   }
 };
+
+export const findMessagesByKeyword = async (req, res) => {
+  try {
+    const { keyword } = req.params;
+    const messages = await Message.find({
+      text: { $regex: keyword, $options: "$i" },
+    });
+
+    await res.json(messages);
+  } catch (error) {
+    res.status(500).send("Error getting messages");
+  }
+};
+
+export const deleteMessageById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const message = await Message.findById(id);
+    if (!message) return res.status(404).send("Message not found");
+
+    await Message.findByIdAndDelete(id);
+
+    await res.status(200).send("Message deleted");
+  } catch (error) {
+    res.status(500).send("Error getting messages");
+  }
+};

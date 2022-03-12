@@ -69,3 +69,16 @@ export const findUser = async (req, res) => {
     res.status(500).send("Error getting user");
   }
 };
+
+export const getRandomUser = async (_, res) => {
+  try {
+    const user = await User.find({});
+
+    const randomNumber = Math.floor(Math.random() * user.length);
+
+    return res.json(user[randomNumber]);
+  } catch (error) {
+    console.error("get user error");
+    res.status(500).send("Error getting user");
+  }
+};
